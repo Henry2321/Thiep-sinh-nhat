@@ -54,13 +54,18 @@ document.addEventListener("DOMContentLoaded", function () {
   var container = document.querySelector(".container");
   var correct = "2309"; // change to desired password
 
+  // Set up input field to directly trap value changes
+  passInput.addEventListener("input", function() {
+    console.log("Input value: '" + passInput.value + "'");
+  });
+
   function checkPassword() {
     // clear previous message
     passMsg.classList.add("hidden");
     var inputVal = passInput.value.trim(); // remove whitespace
-    console.log("checking password", inputVal);
+    console.log("checking password: '" + inputVal + "' vs '" + correct + "'");
     if (inputVal === correct) {
-      console.log("password correct");
+      console.log("password correct!");
       // hide overlay completely and show container
       overlay.classList.add("hidden");
       overlay.style.display = "none"; // extra safety
@@ -69,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // clear input for security
       passInput.value = "";
     } else {
-      console.log("password incorrect, got: " + inputVal);
+      console.log("password incorrect, got: '" + inputVal + "'");
       passMsg.textContent = "Mật mã sai, thử lại.";
       passMsg.classList.remove("hidden");
     }
