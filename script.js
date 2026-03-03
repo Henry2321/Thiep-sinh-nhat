@@ -57,8 +57,9 @@ document.addEventListener("DOMContentLoaded", function () {
   function checkPassword() {
     // clear previous message
     passMsg.classList.add("hidden");
-    console.log("checking password", passInput.value);
-    if (passInput.value === correct) {
+    var inputVal = passInput.value.trim(); // remove whitespace
+    console.log("checking password", inputVal);
+    if (inputVal === correct) {
       console.log("password correct");
       // hide overlay completely and show container
       overlay.classList.add("hidden");
@@ -68,14 +69,14 @@ document.addEventListener("DOMContentLoaded", function () {
       // clear input for security
       passInput.value = "";
     } else {
-      console.log("password incorrect");
+      console.log("password incorrect, got: " + inputVal);
       passMsg.textContent = "Mật mã sai, thử lại.";
       passMsg.classList.remove("hidden");
     }
   }
 
   passBtn.addEventListener("click", checkPassword);
-  passInput.addEventListener("keypress", function (e) {
+  passInput.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
       e.preventDefault();
       checkPassword();
